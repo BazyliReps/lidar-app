@@ -24,7 +24,8 @@ urlpatterns = [
     path("logout/", views.logout_request, name='logout'),
     path("login/", views.login_request, name='login'),
     path("boards/", views.boards, name="boards"),
-    path("scenarios/", views.scenarios, name="scenarios"),
     path("boards/create_board", views.create_board, name="create_board"),
     path("boards/<board_id>", views.edit_board, name="edit_board"),
+    path("scenarios/", views.scenarios, name="scenarios"),
+    path("scenarios/create_scenario", views.create_scenario, name="create_scenario"),
 ]

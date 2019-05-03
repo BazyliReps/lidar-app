@@ -6,9 +6,6 @@
 
     {% load static %}
 
-    <link href="{% static 'tinymce/css/prism.css' %}" rel="stylesheet">
-
-
 
     <!-- Compiled and minified CSS -->
     <link href="{% static 'main/css/materialize.css' %}" rel="stylesheet">
@@ -24,8 +21,8 @@
 
 </head>
 
-<body style="-moz-user-select: none;
-       -webkit-user-select: none; -ms-user-select:none;">
+<body style='-moz-user-select: none;
+       -webkit-user-select: none; -ms-user-select:none;'>
 
 {% include "main/includes/navbar.html" %}
 {% include "main/includes/messages.html" %}
@@ -39,6 +36,5 @@
 
 </body>
 
-<script src="{% static 'tinymce/js/prism.js'%}"></script>
 
 </html>

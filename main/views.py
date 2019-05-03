@@ -6,7 +6,7 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
 
-from .forms import NewUserForm, BoardForm
+from .forms import NewUserForm, BoardForm, ScenarioForm
 from .models import Category, TestBoard, Obstacle, SingleTest
 
 
@@ -33,12 +33,8 @@ def create_board(request):
             board.save()
             name = board.name
             loaded_json = json.loads(board.obstacles_json)
-            print(board.obstacles_json)
             for obs in loaded_json:
                 o = Obstacle(x=obs['x'], y=obs['y'], type=obs['type'])
-                print(o.x)
-                print(o.y)
-                print(o.type)
                 o.save()
                 board.obstacles.add(o)
 
@@ -62,6 +58,25 @@ def scenarios(request):
     return render(request=request,
                   template_name=f"main/scenarios.html",
                   context={"tests": SingleTest.objects.all()})
+
+
+@csrf_exempt
+def create_scenario(request):
+    if request.method == "POST":
+        form = ScenarioForm(request.POST)
+        if form.is_valid():
+            scenario = form.save()
+            name = scenario.name
+            messages.success(request, f'Utworzono scenariusz "{name}"!')
+            return redirect("main:scenarios")
+
+    testboards = TestBoard.objects.all()
+    form = ScenarioForm
+    context = (form, testboards)
+
+    return render(request=request,
+                  template_name=f"main/create_scenario.html",
+                  context={'context': context})
 
 
 def register(request):
