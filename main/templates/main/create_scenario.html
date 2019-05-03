@@ -1,0 +1,86 @@
+{% extends "main/header.html" %}
+
+
+
+{% block content %}
+{% load static %}
+<script type="text/javascript" src="{% static 'main/scripts/board_thumbnail.js' %}" ></script>
+<script type="text/javascript" src="{% static 'main/scripts/html_utils.js' %}" ></script>
+<div class="row">
+
+    <a class="btn waves-effect waves-light black" href='#' onclick='hide("boardsContent")'>pokaż/schowaj plansze do wyboru</a>
+
+    <div class="col s9" id="boards">
+        <h5>nowy scenariusz</h5>
+        <div id="boardsContent"  style="display:block">
+            {% for b in context.1 %}
+                <div class="col s12 m6 ">
+                    <a onclick='chooseBoard("{{b.board_id}}")', style="color:#000">
+                        <div class="card hoverable">
+                            <div class="cart-content">
+                                <div class="card-title">{{b.name}}</div>
+                                <div id="{{b.board_id}}" style="height: 400px">
+                                    <script>
+                                        obstacles = {{b.obstacles_json|safe}}
+                                        draw_board({{b.columns}},"{{b.board_id}}",obstacles, {{b.lidar_x}}, {{b.lidar_y}})
+                                    </script>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                {% endfor %}
+        </div>
+    </div>
+    <div class="col s3">
+        <form method="post">
+            {{context.0.as_p}}
+            <button class="btn waves-effect waves-light black" type="submit" name="action">stwórz scenariusz
+                <i class="material-icons right"></i>
+            </button>
+            <script>
+
+
+
+                document.addEventListener('DOMContentLoaded', function() {
+                var elems = document.querySelectorAll('select');
+                var instances = M.FormSelect.init(elems, null);
+                });
+
+                document.addEventListener('DOMContentLoaded', function() {
+                var elems = document.querySelectorAll('.dropdown-trigger');
+                var instances = M.Dropdown.init(elems, null);
+                });
+
+                function hide(id) {
+                    const elem = document.getElementById(id);
+                    if (elem.style.display === "block") {
+                        elem.style.display = "none";
+                    } else {
+                        elem.style.display = "block";
+                    }
+                }
+
+                function chooseBoard(id) {
+                    const elem = document.getElementById("id_board");
+                    elem.value = id;
+                }
+
+                hide("boardsContent");
+            </script>
+
+            <br>
+            <br>
+
+        </form>
+    </div>
+
+
+
+
+</div>
+
+
+
+{% endblock %}
+

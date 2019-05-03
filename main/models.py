@@ -54,6 +54,7 @@ class Grid(models.Model):
 
 class SingleTest(models.Model):
     OPERATING_MODES = (
+        ('const', 'ciągły'),
         ('1', '1'),
         ('2', '1/2'),
         ('4', '1/4'),
@@ -61,10 +62,17 @@ class SingleTest(models.Model):
         ('16', '1/16'),
         ('32', '1/32'),
     )
-    name = models.CharField(max_length=200)
-    TestBoard = models.ForeignKey(TestBoard, default=1, verbose_name="Test Board", on_delete=models.SET_DEFAULT)
+
+    name = models.CharField(max_length=200, verbose_name='opis')
+    board = models.ForeignKey(TestBoard, default=1, verbose_name="plansza testowa", on_delete=models.SET_DEFAULT)
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    operating_mode = models.CharField(max_length=200, choices=OPERATING_MODES, default='1')
+    reps = models.PositiveSmallIntegerField(verbose_name="powtórzenia pomiaru")
+    operating_mode = models.CharField(
+        choices=OPERATING_MODES,
+        max_length=2,
+        default='1',
+        verbose_name='tryb pracy'
+    )
 
     class Meta:
         verbose_name_plural = "pojedyńczy scenariusz"

@@ -30,7 +30,10 @@ class BoardForm(ModelForm):
                    'lidar_y': forms.HiddenInput()}
 
 
-class SingleTestForm(ModelForm):
+class ScenarioForm(ModelForm):
+    board_set = TestBoard.objects.all()
+    board = forms.ModelChoiceField(queryset=board_set, required=True, label="Plansza")
+
     class Meta:
         model = SingleTest
-        fields = ["name", "operating_mode"]
+        fields = ["name", "operating_mode", "board", "reps"]
