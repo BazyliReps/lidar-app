@@ -1,0 +1,61 @@
+{% extends "main/header.html" %}
+
+
+{% block content %}
+<div class="row">
+    <div class="col s9" id="board" style="height:100vh">
+
+
+
+    </div>
+    <div class="col s3">
+        <form>
+            <input type="text" name="description" id="description" required minlength="3" maxlength="200" size="10" />
+            <label for="description">opis planszy</label>
+            <input type="number" name="rows" id="rows" min="10" max="100" value="20"/>
+            <label for="rows">ilość rzędów w planszy</label>
+            <input type="number" name="columns" id="columns" min="10" max="100" value="20"/>
+            <label for="rows">ilość kolumn w planszy</label>
+            <h5>Wybierz typ przeszkody:</h5>
+            <form>
+                <p>
+                  <label>
+                    <input class="with-gap" name="obstacleType" type="radio" value="square" checked />
+                    <span>Kwadratowa przeszkoda</span>
+                  </label>
+                </p>
+
+                <p>
+                  <label>
+                    <input class="with-gap" name="obstacleType" type="radio" value="circle" />
+                    <span>Okrągła przeszkoda</span>
+                  </label>
+                </p>
+
+                <p>
+                  <label>
+                    <input class="with-gap" name="obstacleType" type="radio" value="lidar" />
+                    <span>Punkt pomiaru</span>
+                  </label>
+                </p>
+
+
+            </form>
+            <br>
+            <br>
+            <button class="btn waves-effect waves-light black" onclick="saveBoard()">stwórz planszę
+                <i class="material-icons right"></i>
+            </button>
+        </form>
+    </div>
+
+
+
+
+    {% load static %}
+    <script type="text/javascript" src="{% static 'main/scripts/grid.js' %}" ></script>
+
+</div>
+
+{% endblock %}
+

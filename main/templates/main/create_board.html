@@ -1,0 +1,58 @@
+{% extends "main/header.html" %}
+
+
+{% block content %}
+<div class="row">
+    <div class="col s9" id="board" style="height:100vh">
+
+
+
+    </div>
+    <div class="col s3">
+        <h5>Wybierz typ przeszkody:</h5>
+            <form>
+                <p>
+                  <label>
+                    <input class="with-gap" name="obstacleType" type="radio" value="square" checked />
+                    <span>Kwadratowa przeszkoda</span>
+                  </label>
+                </p>
+
+                <p>
+                  <label>
+                    <input class="with-gap" name="obstacleType" type="radio" value="circle" />
+                    <span>Okrągła przeszkoda</span>
+                  </label>
+                </p>
+
+                <p>
+                  <label>
+                    <input class="with-gap" name="obstacleType" type="radio" value="lidar" />
+                    <span>Punkt pomiaru</span>
+                  </label>
+                </p>
+
+
+            </form>
+        <form method="post">
+            {{form.as_p}}
+            <button class="btn waves-effect waves-light black" type="submit" name="action">stwórz planszę
+                <i class="material-icons right"></i>
+            </button>
+
+            <br>
+            <br>
+
+        </form>
+    </div>
+
+
+
+
+    {% load static %}
+    <script type="text/javascript" src="{% static 'main/scripts/grid.js' %}" ></script>
+
+</div>
+
+{% endblock %}
+

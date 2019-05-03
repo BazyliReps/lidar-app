@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    {% load static %}
+
+    <link href="{% static 'tinymce/css/prism.css' %}" rel="stylesheet">
+
+
+
+    <!-- Compiled and minified CSS -->
+    <link href="{% static 'main/css/materialize.css' %}" rel="stylesheet">
+
+    <!--
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    -->
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script type="text/javascript" src="{% static 'main/jquery/jquery.js' %}"></script>
+    <script type="application/javascript" src="{% static 'main/raphael/raphael.js' %}"></script>
+
+</head>
+
+<body style="-moz-user-select: none;
+       -webkit-user-select: none; -ms-user-select:none;">
+
+{% include "main/includes/navbar.html" %}
+{% include "main/includes/messages.html" %}
+
+<div class="container">
+    <br>
+    {% block content %}
+
+    {% endblock %}
+</div>
+
+</body>
+
+<script src="{% static 'tinymce/js/prism.js'%}"></script>
+
+</html>

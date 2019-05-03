@@ -1,0 +1,22 @@
+{% extends "main/header.html" %}
+
+
+{% block content %}
+
+<div class="row">
+    <div class="col s9">
+
+    </div>
+    <div class="col s3">
+        <form method="post">
+            {% csrf_token %}
+            {{form.as_p}}
+            <button class="btn waves-effect waves-light black" name="action" type="submit">dodaj planszę
+                <i class="material-icons right"></i>
+            </button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}
+
