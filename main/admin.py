@@ -1,17 +1,12 @@
 from django.contrib import admin
-from .models import Category, TestBoard, TestScenario, Obstacle, SingleTest
-from django.db import models
+from .models import TestBoard, TestScenario, Obstacle, SingleTest, SingleScanResult, Measurement
 
 
 # Register your models here.
 
-class CategoryAdmin(admin.ModelAdmin):
-    fields = ["category",
-              "summary",
-              "slug"]
-
-
 admin.site.register(TestBoard)
 admin.site.register(Obstacle)
 admin.site.register(SingleTest)
-admin.site.register(Category, CategoryAdmin)
+admin.site.register(TestScenario)
+admin.site.register(SingleScanResult)
+admin.site.register(Measurement)

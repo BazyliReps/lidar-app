@@ -7,17 +7,19 @@
         var circle = p.circle(20,35,15);
         circle.attr("fill", "#f00");
         circle.attr("stroke", "#fff");
+
         </script>
         <ul class="right hide-on-med-and-down" id="nav-mobile">
-            <li><a href="/" class="waves-effect white black-text btn">Home</a></li>
+            <li><a class="waves-effect white black-text btn" href="/">Home</a></li>
             {% if user.is_authenticated %}
-                <li><a href="/boards" class="waves-effect white black-text btn">Plansze testowe</a>
-                <li><a href="/scenarios" class="waves-effect white black-text btn">Scenariusze testowe</a>
-                <li><a href="/account" class="waves-effect white black-text btn">{{user.username}}</a></li>
-                <li><a href="/logout" class="waves-effect white black-text btn">Logout</a></li>
+            <li><a class="waves-effect white black-text btn" href="/boards">Plansze testowe</a>
+            <li><a class="waves-effect white black-text btn" href="/tests">Pojedyńcze testy</a>
+            <li><a class="waves-effect white black-text btn" href="/scenarios">Scenariusze testowe</a>
+            <li><a class="waves-effect white black-text btn" href="/account">{{user.username}}</a></li>
+            <li><a class="waves-effect white black-text btn" href="/logout">Logout</a></li>
             {% else %}
-                <li><a href="/register">Register</a></li>
-                <li><a href="/login">Login</a></li>
+            <li><a href="/register">Register</a></li>
+            <li><a href="/login">Login</a></li>
             {% endif %}
         </ul>
     </div>

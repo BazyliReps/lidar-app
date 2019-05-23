@@ -2,7 +2,7 @@ from datetime import datetime
 from django import forms
 from django.forms import ModelForm
 
-from .models import TestBoard, SingleTest
+from .models import TestBoard, SingleTest, TestScenario
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 
@@ -33,7 +33,15 @@ class BoardForm(ModelForm):
 class ScenarioForm(ModelForm):
     board_set = TestBoard.objects.all()
     board = forms.ModelChoiceField(queryset=board_set, required=True, label="Plansza")
+    test_set = SingleTest.objects.all()
+    tests = forms.ModelMultipleChoiceField(queryset=test_set, required=True, label="Testy")
 
     class Meta:
+        model = TestScenario
+        fields = ["name", "summary", "board", "tests"]
+
+
+class SingleTestForm(ModelForm):
+    class Meta:
         model = SingleTest
-        fields = ["name", "operating_mode", "board", "delay1", "delay2", "reps"]
+        fields = ["name", "operating_mode", "delay"]

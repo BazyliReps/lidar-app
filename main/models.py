@@ -5,19 +5,6 @@ import uuid
 
 # Create your models here.
 
-
-class Category(models.Model):
-    category = models.CharField(max_length=200)
-    summary = models.CharField(max_length=200)
-    slug = models.CharField(max_length=200)
-
-    class Meta:
-        verbose_name_plural = "Categories"
-
-    def __str__(self):
-        return self.category
-
-
 class Obstacle(models.Model):
     x = models.PositiveSmallIntegerField()
     y = models.PositiveSmallIntegerField()
@@ -46,12 +33,6 @@ class TestBoard(models.Model):
         return self.name
 
 
-class Grid(models.Model):
-    rows = models.PositiveSmallIntegerField()
-    columns = models.PositiveSmallIntegerField()
-    cell_size = models.PositiveSmallIntegerField(default=20, verbose_name="cell size")
-
-
 class SingleTest(models.Model):
     OPERATING_MODES = (
         ('const', 'ciągły'),
@@ -64,11 +45,8 @@ class SingleTest(models.Model):
     )
 
     name = models.CharField(max_length=200, verbose_name='opis')
-    board = models.ForeignKey(TestBoard, default=1, verbose_name="plansza testowa", on_delete=models.SET_DEFAULT)
-    scenario_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    reps = models.PositiveSmallIntegerField(verbose_name="powtórzenia pomiaru")
-    delay1 = models.FloatField(default=0.001)
-    delay2 = models.FloatField(default=0.01)
+    test_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    delay = models.FloatField(default=0.001)
     operating_mode = models.CharField(
         choices=OPERATING_MODES,
         max_length=2,
@@ -77,20 +55,37 @@ class SingleTest(models.Model):
     )
 
     class Meta:
-        verbose_name_plural = "pojedyńczy scenariusz"
+        verbose_name_plural = "pojedyńczy test"
 
     def __str__(self):
-        return self.name
+        return str(self.operating_mode) + " " + str(self.delay)
 
 
 class TestScenario(models.Model):
     name = models.CharField(max_length=200)
-    category = models.ForeignKey(Category, default=1, verbose_name="Category", on_delete=models.SET_DEFAULT)
+    summary = models.CharField(max_length=200, verbose_name="uwagi")
     created = models.DateTimeField(default=datetime.now())
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    tests = models.ManyToManyField(SingleTest)
+    board = models.ForeignKey(TestBoard, default=1, verbose_name="plansza testowa", on_delete=models.SET_DEFAULT)
 
     class Meta:
-        verbose_name_plural = "Test Scenarios"
+        verbose_name_plural = "Scenariusz testowy"
 
     def __str__(self):
         return self.name
+
+
+class SingleScanResult(models.Model):
+    single_scan_result_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    created = models.DateTimeField(default=datetime.now())
+    delay = models.FloatField(default=0.001)
+    mode = models.PositiveSmallIntegerField()
+    scenario = models.ForeignKey(TestScenario, on_delete=models.CASCADE)
+
+
+class Measurement(models.Model):
+    step_number = models.SmallIntegerField()
+    distance = models.FloatField()
+    signal_strength = models.FloatField()
+    scan = models.ForeignKey(SingleScanResult, on_delete=models.CASCADE)

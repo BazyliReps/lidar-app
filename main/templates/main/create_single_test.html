@@ -1,0 +1,36 @@
+{% extends "main/header.html" %}
+
+
+{% block content %}
+{% load static %}
+<script type="text/javascript" src="{% static 'main/scripts/html_utils.js' %}" ></script>
+<div class="row">
+
+    <h5>nowy test</h5>
+
+    <div class="col s3">
+        <form method="post">
+            {{form.as_p}}
+            <button class="btn waves-effect waves-light black" name="action" type="submit">stwórz test
+                <i class="material-icons right"></i>
+            </button>
+
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                var elems = document.querySelectorAll('select');
+                var instances = M.FormSelect.init(elems, null);
+                });
+                document.addEventListener('DOMContentLoaded', function() {
+                var elems = document.querySelectorAll('.dropdown-trigger');
+                var instances = M.Dropdown.init(elems, null);
+                });
+
+            </script>
+        </form>
+    </div>
+
+</div>
+
+
+{% endblock %}
+

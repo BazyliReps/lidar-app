@@ -7,8 +7,8 @@ from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
 import paho.mqtt.publish as publish
 
-from .forms import NewUserForm, BoardForm, ScenarioForm
-from .models import Category, TestBoard, Obstacle, SingleTest
+from .forms import NewUserForm, BoardForm, SingleTestForm, ScenarioForm
+from .models import TestBoard, Obstacle, SingleTest, TestScenario
 
 
 # Create your views here.
@@ -16,7 +16,7 @@ from .models import Category, TestBoard, Obstacle, SingleTest
 def homepage(request):
     return render(request=request,
                   template_name="main/home.html",
-                  context={"categories": Category.objects.all()})
+                  context={})
 
 
 def boards(request):
@@ -55,10 +55,33 @@ def edit_board(request, board_id):
                   context={"grid": grid.first()})
 
 
+def tests(request):
+    return render(request=request,
+                  template_name=f"main/tests.html",
+                  context={"tests": SingleTest.objects.all()})
+
+
+@csrf_exempt
+def create_single_test(request):
+    if request.method == "POST":
+        form = SingleTestForm(request.POST)
+        if form.is_valid():
+            test = form.save()
+            name = test.name
+            messages.success(request, f'Utworzono test "{name}"!')
+            return redirect("main:tests")
+
+    form = SingleTestForm
+
+    return render(request=request,
+                  template_name=f"main/create_single_test.html",
+                  context={'form': form})
+
+
 def scenarios(request):
     return render(request=request,
                   template_name=f"main/scenarios.html",
-                  context={"tests": SingleTest.objects.all()})
+                  context={"scenarios": TestScenario.objects.all()})
 
 
 @csrf_exempt
@@ -72,8 +95,9 @@ def create_scenario(request):
             return redirect("main:scenarios")
 
     testboards = TestBoard.objects.all()
+    testmodes = SingleTest.objects.all()
     form = ScenarioForm
-    context = (form, testboards)
+    context = (form, testboards, testmodes)
 
     return render(request=request,
                   template_name=f"main/create_scenario.html",
@@ -127,12 +151,12 @@ def login_request(request):
         return render(request, "main/login.html", {"form": form})
 
 
-def execute_test(request, scenario_id):
-    scenario = SingleTest.objects.filter(scenario_id=scenario_id)[0]
-    print(scenario)
-    delay1 = scenario.delay1
-    delay2 = scenario.delay2
-    mode = scenario.operating_mode
-    url = 'http://192.168.0.56:9000/' + str(mode) + "_" + str(delay1) + "_" + str(delay2)
-    r = json.loads(requests.get(url, params=request.GET).content.decode('utf8'))
-    return render(request, "main/display_measurements.html", {"measurements": r})
+def execute_test(request, test_id):
+    test = SingleTest.objects.filter(test_id=test_id)[0]
+    print(test)
+    delay = test.delay
+    mode = test.operating_mode
+    params = {"delay": delay, "mode": mode}
+    params_json = json.dumps(params)
+    publish.single("make_scan", params_json, hostname="192.168.0.50")
+    return redirect("main:tests")
