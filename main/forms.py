@@ -36,4 +36,4 @@ class ScenarioForm(ModelForm):
 
     class Meta:
         model = SingleTest
-        fields = ["name", "operating_mode", "board", "reps"]
+        fields = ["name", "operating_mode", "board", "delay1", "delay2", "reps"]

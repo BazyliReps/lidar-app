@@ -9,12 +9,18 @@
     <div class="col s9">
         {% for t in tests %}
         <div class="col s12 m6 ">
-            <a href="{{b.board_id}}", style="color:#000">
+            <a href="{{t.scenario_id}}", style="color:#000">
                 <div class="card hoverable">
                     <div class="cart-content">
                         <div class="card-title">{{t.name}}</div>
-                        <div id="{{t.id}}" style="height: 400px">
+                        <div id="{{t.scenario_id}}" >
+                            <ul>
 
+                                <li>tryb pracy: {{t.operating_mode}}</li>
+                                <li>delay1: {{t.delay1}}</li>
+                                <li>delay2: {{t.delay2}}</li>
+
+                            </ul>
                         </div>
                     </div>
                 </div>

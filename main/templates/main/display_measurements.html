@@ -1,0 +1,27 @@
+{% extends "main/header.html" %}
+
+
+{% block content %}
+
+<div id="map" style="height: 1000px">
+
+</div>
+
+{% load static %}
+<script type="text/javascript" src="{% static 'main/scripts/display_measurements.js' %}" ></script>
+
+<script>
+    draw_points({{measurements}})
+</script>
+
+
+
+
+
+
+
+
+
+
+{% endblock %}
+

@@ -65,8 +65,10 @@ class SingleTest(models.Model):
 
     name = models.CharField(max_length=200, verbose_name='opis')
     board = models.ForeignKey(TestBoard, default=1, verbose_name="plansza testowa", on_delete=models.SET_DEFAULT)
-    id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    scenario_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     reps = models.PositiveSmallIntegerField(verbose_name="powtórzenia pomiaru")
+    delay1 = models.FloatField(default=0.001)
+    delay2 = models.FloatField(default=0.01)
     operating_mode = models.CharField(
         choices=OPERATING_MODES,
         max_length=2,

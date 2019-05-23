@@ -1,10 +1,11 @@
 import json
-
+import requests
 from django.contrib import messages
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.forms import AuthenticationForm
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
+import paho.mqtt.publish as publish
 
 from .forms import NewUserForm, BoardForm, ScenarioForm
 from .models import Category, TestBoard, Obstacle, SingleTest
@@ -124,3 +125,14 @@ def login_request(request):
     else:
         form = AuthenticationForm()
         return render(request, "main/login.html", {"form": form})
+
+
+def execute_test(request, scenario_id):
+    scenario = SingleTest.objects.filter(scenario_id=scenario_id)[0]
+    print(scenario)
+    delay1 = scenario.delay1
+    delay2 = scenario.delay2
+    mode = scenario.operating_mode
+    url = 'http://192.168.0.56:9000/' + str(mode) + "_" + str(delay1) + "_" + str(delay2)
+    r = json.loads(requests.get(url, params=request.GET).content.decode('utf8'))
+    return render(request, "main/display_measurements.html", {"measurements": r})

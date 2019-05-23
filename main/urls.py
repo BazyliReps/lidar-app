@@ -28,4 +28,5 @@ urlpatterns = [
     path("boards/<board_id>", views.edit_board, name="edit_board"),
     path("scenarios/", views.scenarios, name="scenarios"),
     path("scenarios/create_scenario", views.create_scenario, name="create_scenario"),
+    path("scenarios/<scenario_id>", views.execute_test, name="execute_scenario"),
 ]

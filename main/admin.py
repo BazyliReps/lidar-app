@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Category, TestBoard, TestScenario, Obstacle
+from .models import Category, TestBoard, TestScenario, Obstacle, SingleTest
 from django.db import models
 
 
@@ -13,5 +13,5 @@ class CategoryAdmin(admin.ModelAdmin):
 
 admin.site.register(TestBoard)
 admin.site.register(Obstacle)
-admin.site.register(TestScenario)
+admin.site.register(SingleTest)
 admin.site.register(Category, CategoryAdmin)
