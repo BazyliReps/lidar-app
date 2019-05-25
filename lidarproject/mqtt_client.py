@@ -1,5 +1,9 @@
 import paho.mqtt.client as mqtt
 import json
+from django.contrib import messages
+from django.shortcuts import redirect
+
+from main.models import SingleScanResult, TestScenario
 
 
 def on_connect(client, userdata, flags, rc):
@@ -11,7 +15,18 @@ def on_message(client, userdata, msg):
     if msg.topic == "scan_ready":
         print("doszlo!!!!")
         json_data = json.loads(msg.payload)
-        print(json_data)
+        scenario_id = json_data["scenario_id"]
+        scenario = TestScenario.objects.filter(id=scenario_id)[0]
+        tests = json_data["results"]
+        for t in tests:
+            delay = float(t["delay"])
+            mode = int(t["mode"])
+            measurements = t["measurements"]
+            single_scan_result = SingleScanResult(delay=delay, mode=mode, scenario=scenario, measurements=measurements)
+            single_scan_result.save()
+
+        # messages.info("Pomiary zakończone!")
+        return redirect("main:boards")
 
 
 client = mqtt.Client()

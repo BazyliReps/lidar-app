@@ -1,5 +1,4 @@
 import json
-import requests
 from django.contrib import messages
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.forms import AuthenticationForm
@@ -160,3 +159,12 @@ def execute_test(request, test_id):
     params_json = json.dumps(params)
     publish.single("make_scan", params_json, hostname="192.168.0.50")
     return redirect("main:tests")
+
+
+def execute_scenario(request, id):
+    scenario = TestScenario.objects.filter(id=id)[0]
+    tests_set = list(scenario.tests.all().values())
+    data = {"id": id, "tests": tests_set}
+    data_json = json.dumps(data, default=lambda d: '<>')
+    publish.single("make_scan", data_json, hostname="192.168.0.50")
+    return redirect("main:scenarios")

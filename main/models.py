@@ -81,11 +81,8 @@ class SingleScanResult(models.Model):
     created = models.DateTimeField(default=datetime.now())
     delay = models.FloatField(default=0.001)
     mode = models.PositiveSmallIntegerField()
+    measurements = models.TextField()
     scenario = models.ForeignKey(TestScenario, on_delete=models.CASCADE)
 
-
-class Measurement(models.Model):
-    step_number = models.SmallIntegerField()
-    distance = models.FloatField()
-    signal_strength = models.FloatField()
-    scan = models.ForeignKey(SingleScanResult, on_delete=models.CASCADE)
+    def __str__(self):
+        return str(self.delay) + ", " + str(self.mode) + ", " + str(self.created)
