@@ -22,7 +22,10 @@ def on_message(client, userdata, msg):
             delay = float(t["delay"])
             mode = int(t["mode"])
             measurements = t["measurements"]
-            single_scan_result = SingleScanResult(delay=delay, mode=mode, scenario=scenario, measurements=measurements)
+            scan_time = float(t["scan_time"])
+            missed_steppes = int(t["missed_steppes"])
+            single_scan_result = SingleScanResult(delay=delay, mode=mode, scenario=scenario, measurements=measurements,
+                                                  scan_time=scan_time, missed_steppes=missed_steppes)
             single_scan_result.save()
 
         # messages.info("Pomiary zakończone!")

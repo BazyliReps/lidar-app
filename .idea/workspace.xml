@@ -2,12 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="728c0507-a2c6-40e7-83c2-279b45ef11ed" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/main/templates/main/results.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lidarproject/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/lidarproject/__init__.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lidarproject/mqtt_client.py" beforeDir="false" afterPath="$PROJECT_DIR$/lidarproject/mqtt_client.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lidarproject/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/lidarproject/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/forms.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/static/main/scripts/display_measurements.js" beforeDir="false" afterPath="$PROJECT_DIR$/main/static/main/scripts/display_measurements.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/templates/main/create_scenario.html" beforeDir="false" afterPath="$PROJECT_DIR$/main/templates/main/create_scenario.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/templates/main/display_measurements.html" beforeDir="false" afterPath="$PROJECT_DIR$/main/templates/main/display_measurements.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main/templates/main/includes/navbar.html" beforeDir="false" afterPath="$PROJECT_DIR$/main/templates/main/includes/navbar.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/main/views.py" afterDir="false" />
     </list>
@@ -22,8 +25,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="561">
-              <caret line="93" column="45" lean-forward="true" selection-start-line="93" selection-start-column="12" selection-end-line="93" selection-end-column="45" />
+            <state relative-caret-position="454">
+              <caret line="178" lean-forward="true" selection-start-line="178" selection-end-line="178" />
               <folding>
                 <element signature="e#0#11#0" expanded="true" />
               </folding>
@@ -32,43 +35,49 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/main/models.py">
+        <entry file="file://$PROJECT_DIR$/main/templates/main/includes/navbar.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="590">
-              <caret line="87" column="80" selection-start-line="87" selection-start-column="80" selection-end-line="87" selection-end-column="80" />
-              <folding>
-                <element signature="e#0#28#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="289">
+              <caret line="17" column="75" selection-start-line="17" selection-start-column="75" selection-end-line="17" selection-end-column="75" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/lidarproject/mqtt_client.py">
+        <entry file="file://$PROJECT_DIR$/main/templates/main/results.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="459">
-              <caret line="27" column="46" lean-forward="true" selection-start-line="27" selection-start-column="46" selection-end-line="27" selection-end-column="46" />
+            <state relative-caret-position="119">
+              <caret line="7" column="32" selection-start-line="7" selection-start-column="32" selection-end-line="7" selection-end-column="32" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/main/templates/main/boards.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="357">
+              <caret line="21" column="37" lean-forward="true" selection-start-line="16" selection-start-column="28" selection-end-line="21" selection-end-column="37" />
               <folding>
-                <element signature="e#0#31#0" expanded="true" />
+                <element signature="n#style#0;n#a#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/main/templates/main/create_single_test.html">
+        <entry file="file://$PROJECT_DIR$/main/static/main/scripts/display_measurements.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="442">
-              <caret line="26" selection-start-line="26" selection-end-line="26" />
+            <state relative-caret-position="238">
+              <caret line="14" column="4" selection-start-line="14" selection-start-column="4" selection-end-line="14" selection-end-column="4" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/main/templates/main/scenarios.html">
+        <entry file="file://$PROJECT_DIR$/main/static/main/scripts/board_thumbnail.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="19" column="22" selection-start-line="19" selection-start-column="22" selection-end-line="19" selection-end-column="22" />
+            <state relative-caret-position="-16">
+              <caret line="8" column="47" lean-forward="true" selection-start-line="8" selection-start-column="3" selection-end-line="8" selection-end-column="47" />
             </state>
           </provider>
         </entry>
@@ -76,8 +85,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="544">
-              <caret line="33" column="76" selection-start-line="33" selection-start-column="76" selection-end-line="33" selection-end-column="76" />
+            <state relative-caret-position="579">
+              <caret line="35" column="21" selection-start-line="35" selection-start-column="21" selection-end-line="35" selection-end-column="21" />
               <folding>
                 <element signature="e#636#655#0" expanded="true" />
               </folding>
@@ -86,38 +95,33 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/main/templates/main/create_scenario.html">
+        <entry file="file://$PROJECT_DIR$/main/templates/main/scenarios.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="493">
-              <caret line="29" column="24" selection-start-line="29" selection-start-column="24" selection-end-line="29" selection-end-column="24" />
+            <state relative-caret-position="51">
+              <caret line="3" selection-start-line="3" selection-end-line="3" selection-end-column="19" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/main/templates/main/display_measurements.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="85">
+              <caret line="5" column="21" lean-forward="true" selection-start-line="5" selection-start-column="21" selection-end-line="5" selection-end-column="35" />
               <folding>
-                <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#a#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-                <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#a#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/main/forms.py">
+        <entry file="file://$PROJECT_DIR$/main/templates/main/create_board.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="578">
-              <caret line="40" column="54" selection-start-line="40" selection-start-column="54" selection-end-line="40" selection-end-column="54" />
+            <state relative-caret-position="68">
+              <caret line="4" column="17" lean-forward="true" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="17" />
               <folding>
-                <element signature="e#0#29#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/main/admin.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
-              <folding>
-                <element signature="e#0#32#0" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#0;n#!!top" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -178,38 +182,38 @@
         <option value="$PROJECT_DIR$/main/templates/main/boards.html" />
         <option value="$PROJECT_DIR$/lidarproject/settings.py" />
         <option value="$PROJECT_DIR$/main/migrations/0004_auto_20190510_1824.py" />
-        <option value="$PROJECT_DIR$/main/templates/main/display_measurements.html" />
-        <option value="$PROJECT_DIR$/main/static/main/scripts/display_measurements.js" />
         <option value="$PROJECT_DIR$/mq" />
         <option value="$PROJECT_DIR$/mq.py" />
         <option value="$PROJECT_DIR$/main/templates/main/tests.html" />
         <option value="$PROJECT_DIR$/main/templates/main/scenarios.html" />
-        <option value="$PROJECT_DIR$/main/templates/main/includes/navbar.html" />
         <option value="$PROJECT_DIR$/main/templates/main/create_single_test.html" />
-        <option value="$PROJECT_DIR$/main/forms.py" />
-        <option value="$PROJECT_DIR$/main/templates/main/create_scenario.html" />
-        <option value="$PROJECT_DIR$/main/urls.py" />
         <option value="$PROJECT_DIR$/main/admin.py" />
         <option value="$PROJECT_DIR$/lidarproject/__init__.py" />
         <option value="$PROJECT_DIR$/lidarproject/urls.py" />
+        <option value="$PROJECT_DIR$/main/templates/main/create_scenario.html" />
+        <option value="$PROJECT_DIR$/main/forms.py" />
         <option value="$PROJECT_DIR$/main/models.py" />
-        <option value="$PROJECT_DIR$/main/views.py" />
         <option value="$PROJECT_DIR$/lidarproject/mqtt_client.py" />
+        <option value="$PROJECT_DIR$/main/templates/main/includes/navbar.html" />
+        <option value="$PROJECT_DIR$/main/views.py" />
+        <option value="$PROJECT_DIR$/main/urls.py" />
+        <option value="$PROJECT_DIR$/main/static/main/scripts/display_measurements.js" />
+        <option value="$PROJECT_DIR$/main/templates/main/display_measurements.html" />
+        <option value="$PROJECT_DIR$/main/templates/main/results.html" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-10" />
-    <option name="y" value="-10" />
-    <option name="width" value="1939" />
-    <option name="height" value="1049" />
+    <option name="x" value="-393" />
+    <option name="y" value="-8" />
+    <option name="width" value="1940" />
+    <option name="height" value="1060" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -279,6 +283,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -286,18 +291,18 @@
     <property name="settings.editor.selected.configurable" value="Errors" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\bazyli\PycharmProjects\lidarproject\main\static\main" />
+      <recent name="C:\Users\bazyli\PycharmProjects\lidarproject\main" />
+      <recent name="C:\Users\bazyli\PycharmProjects\lidarproject\main\templates\main" />
+      <recent name="C:\Users\bazyli\PycharmProjects\lidarproject\main\templates" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\bazyli\repozytoria\lidar-app\main\templates\main" />
       <recent name="C:\Users\bazyli\repozytoria\lidar-app\main\static\main\scripts" />
       <recent name="C:\Users\bazyli\repozytoria\lidar-app\main\migrations" />
       <recent name="C:\Users\bazyli\PycharmProjects\lidarproject\main\static\main\scripts" />
       <recent name="C:\Users\bazyli\PycharmProjects\lidarproject\main\templates\main" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\bazyli\PycharmProjects\lidarproject\main\static\main" />
-      <recent name="C:\Users\bazyli\PycharmProjects\lidarproject\main" />
-      <recent name="C:\Users\bazyli\PycharmProjects\lidarproject\main\templates\main" />
-      <recent name="C:\Users\bazyli\PycharmProjects\lidarproject\main\templates" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -368,7 +373,6 @@
     </layout-to-restore>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/main/templates/main/services.py" />
     <entry file="file://$PROJECT_DIR$/main/templates/main/edit_board.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
@@ -475,36 +479,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main/templates/main/display_measurements.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="85">
-          <caret line="5" column="30" selection-start-line="5" selection-start-column="30" selection-end-line="5" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/templates/main/boards.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="25" column="16" selection-start-line="25" selection-start-column="12" selection-end-line="25" selection-end-column="16" />
-          <folding>
-            <element signature="n#style#0;n#a#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/static/main/scripts/board_thumbnail.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/templates/main/create_board.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="884">
-          <caret line="52" column="94" selection-start-line="51" selection-start-column="4" selection-end-line="52" selection-end-column="94" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/main/static/main/css/materialize.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="109548">
@@ -518,13 +492,6 @@
     <entry file="file://$PROJECT_DIR$/mq.py" />
     <entry file="file://$PROJECT_DIR$/db.sqlite3">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/static/main/scripts/display_measurements.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="8" column="23" lean-forward="true" selection-start-line="8" selection-start-column="23" selection-end-line="8" selection-end-column="23" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main/tests.py">
       <provider selected="true" editor-type-id="text-editor" />
@@ -550,49 +517,6 @@
     <entry file="file://$PROJECT_DIR$/main/static/main/scripts/html_utils.js">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/main/templates/main/includes/navbar.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" column="77" selection-start-line="16" selection-start-column="77" selection-end-line="16" selection-end-column="77" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/templates/main/create_single_test.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="26" selection-start-line="26" selection-end-line="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/templates/main/scenarios.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="19" column="22" selection-start-line="19" selection-start-column="22" selection-end-line="19" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="544">
-          <caret line="33" column="76" selection-start-line="33" selection-start-column="76" selection-end-line="33" selection-end-column="76" />
-          <folding>
-            <element signature="e#636#655#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/templates/main/create_scenario.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="29" column="24" selection-start-line="29" selection-start-column="24" selection-end-line="29" selection-end-column="24" />
-          <folding>
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#a#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#a#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lidarproject/__init__.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -608,40 +532,27 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main/admin.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
+        <state relative-caret-position="170">
+          <caret line="11" selection-start-line="11" selection-end-line="11" />
           <folding>
             <element signature="e#0#32#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/main/templates/main/create_single_test.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="26" selection-start-line="26" selection-end-line="26" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/main/forms.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="578">
-          <caret line="40" column="54" selection-start-line="40" selection-start-column="54" selection-end-line="40" selection-end-column="54" />
+        <state relative-caret-position="539">
+          <caret line="47" column="65" selection-start-line="47" selection-start-column="65" selection-end-line="47" selection-end-column="65" />
           <folding>
             <element signature="e#0#29#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="590">
-          <caret line="87" column="80" selection-start-line="87" selection-start-column="80" selection-end-line="87" selection-end-column="80" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="561">
-          <caret line="93" column="45" lean-forward="true" selection-start-line="93" selection-start-column="12" selection-end-line="93" selection-end-column="45" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -649,10 +560,117 @@
     <entry file="file://$PROJECT_DIR$/lidarproject/mqtt_client.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="459">
-          <caret line="27" column="46" lean-forward="true" selection-start-line="27" selection-start-column="46" selection-end-line="27" selection-end-column="46" />
+          <caret line="27" column="100" selection-start-line="27" selection-start-column="100" selection-end-line="27" selection-end-column="100" />
           <folding>
             <element signature="e#0#31#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="471">
+          <caret line="86" column="34" selection-start-line="86" selection-start-column="34" selection-end-line="86" selection-end-column="34" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/templates/main/create_scenario.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="391">
+          <caret line="47" column="19" lean-forward="true" selection-start-line="47" selection-start-column="19" selection-end-line="47" selection-end-column="19" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#a#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#div#0;n#div#0;n#a#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/templates/main/includes/navbar.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" column="75" selection-start-line="17" selection-start-column="75" selection-end-line="17" selection-end-column="75" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/templates/main/scenarios.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" selection-start-line="3" selection-end-line="3" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="454">
+          <caret line="178" lean-forward="true" selection-start-line="178" selection-end-line="178" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="579">
+          <caret line="35" column="21" selection-start-line="35" selection-start-column="21" selection-end-line="35" selection-end-column="21" />
+          <folding>
+            <element signature="e#636#655#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/templates/main/boards.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="21" column="37" lean-forward="true" selection-start-line="16" selection-start-column="28" selection-end-line="21" selection-end-column="37" />
+          <folding>
+            <element signature="n#style#0;n#a#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/static/main/scripts/board_thumbnail.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-16">
+          <caret line="8" column="47" lean-forward="true" selection-start-line="8" selection-start-column="3" selection-end-line="8" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/static/main/scripts/display_measurements.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="4" selection-start-line="14" selection-start-column="4" selection-end-line="14" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/templates/main/display_measurements.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="21" lean-forward="true" selection-start-line="5" selection-start-column="21" selection-end-line="5" selection-end-column="35" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/templates/main/create_board.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="17" lean-forward="true" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="17" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main/templates/main/results.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="32" selection-start-line="7" selection-start-column="32" selection-end-line="7" selection-end-column="32" />
         </state>
       </provider>
     </entry>

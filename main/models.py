@@ -53,6 +53,7 @@ class SingleTest(models.Model):
         default='1',
         verbose_name='tryb pracy'
     )
+    repetitions = models.PositiveSmallIntegerField(default=10, verbose_name="powtórzenia")
 
     class Meta:
         verbose_name_plural = "pojedyńczy test"
@@ -83,6 +84,8 @@ class SingleScanResult(models.Model):
     mode = models.PositiveSmallIntegerField()
     measurements = models.TextField()
     scenario = models.ForeignKey(TestScenario, on_delete=models.CASCADE)
+    scan_time = models.FloatField()
+    missed_steppes = models.PositiveSmallIntegerField()
 
     def __str__(self):
         return str(self.delay) + ", " + str(self.mode) + ", " + str(self.created)

@@ -1,15 +1,18 @@
-function draw_points(data) {
-    var div = document.getElementById("map");
+function draw_points(data, id) {
+    var div = document.getElementById(id);
     var rect = div.getBoundingClientRect();
     var x = rect.left;
     var y = rect.top;
     var width = rect.right - x;
     var height = rect.bottom - y;
+    var size = width < height ? width : height;
 
     var midX = width/2;
     var midY = y + height/2;
 
      var pa = Raphael(div);
+     pa.setViewBox(0, 0, size, size, true);
+     pa.canvas.setAttribute('preserveAspectRatio', 'none');
 
     var circle = pa.circle(midX, midY, 5)
     let pathline = 'M'+midX.toString()+" "+midY.toString()+"L"+(midX + 30).toString() + " " + midY.toString();

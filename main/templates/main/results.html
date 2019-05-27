@@ -1,0 +1,38 @@
+{% extends "main/header.html" %}
+{% block content %}
+<div class="row">
+
+    <div class="col s9">
+
+    </div>
+    <div class="col s3" id="draw">
+        {% for r in results %}
+
+        <div class="col s12 m6 ">
+            <a , href="{{r.pk}}" style="color:#000">
+                <div class="card hoverable">
+                    <div class="cart-content">
+                        <div id="{{r.pk}}" style="height: 400px">
+                            Tryb: {{r.mode}}
+                            <br>
+                            Delay: {{r.delay}}
+                            <br>
+                            Utworzono: {{r.created}}
+                            <div id="{{r.pk}}_draw"></div>
+                            {% load static %}
+                            <script type="text/javascript" src="{% static 'main/scripts/display_measurements.js' %}" ></script>
+                            <script>
+                                draw_points({{r.measurements}}, "{{r.pk}}_draw")
+                            </script>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+
+</div>
+
+{% endblock %}
+

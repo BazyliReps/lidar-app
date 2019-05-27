@@ -7,7 +7,7 @@ from django.views.decorators.csrf import csrf_exempt
 import paho.mqtt.publish as publish
 
 from .forms import NewUserForm, BoardForm, SingleTestForm, ScenarioForm
-from .models import TestBoard, Obstacle, SingleTest, TestScenario
+from .models import TestBoard, Obstacle, SingleTest, TestScenario, SingleScanResult
 
 
 # Create your views here.
@@ -166,5 +166,19 @@ def execute_scenario(request, id):
     tests_set = list(scenario.tests.all().values())
     data = {"id": id, "tests": tests_set}
     data_json = json.dumps(data, default=lambda d: '<>')
+    print(data_json)
     publish.single("make_scan", data_json, hostname="192.168.0.50")
     return redirect("main:scenarios")
+
+
+def results(request):
+    return render(request=request,
+                  template_name=f"main/results.html",
+                  context={"results": SingleScanResult.objects.all()})
+
+
+def display_result(request, pk):
+    result = SingleScanResult.objects.filter(pk=pk)[0]
+    return render(request=request,
+                  template_name=f"main/display_measurements.html",
+                  context={"measurements": result.measurements})

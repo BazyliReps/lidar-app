@@ -34,7 +34,8 @@ class ScenarioForm(ModelForm):
     board_set = TestBoard.objects.all()
     board = forms.ModelChoiceField(queryset=board_set, required=True, label="Plansza")
     test_set = SingleTest.objects.all()
-    tests = forms.ModelMultipleChoiceField(queryset=test_set, required=True, label="Testy")
+    tests = forms.ModelMultipleChoiceField(queryset=test_set, required=True,
+                                           label="Testy")
 
     class Meta:
         model = TestScenario
@@ -44,4 +45,4 @@ class ScenarioForm(ModelForm):
 class SingleTestForm(ModelForm):
     class Meta:
         model = SingleTest
-        fields = ["name", "operating_mode", "delay"]
+        fields = ["name", "operating_mode", "delay", "repetitions"]

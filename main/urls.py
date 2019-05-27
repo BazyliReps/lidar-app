@@ -32,4 +32,6 @@ urlpatterns = [
     path("scenarios/", views.scenarios, name="scenarios"),
     path("scenarios/create_scenario", views.create_scenario, name="create_scenario"),
     path("scenarios/<id>", views.execute_scenario, name="execute_scenario"),
+    path("results/", views.results, name="results"),
+    path("results/<pk>", views.display_result, name="display_result"),
 ]
