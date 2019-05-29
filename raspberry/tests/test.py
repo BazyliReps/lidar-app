@@ -43,11 +43,14 @@ def get_distance():
         ser.close()
     return [dist, strength]
 
-def turn(mode, delay):
+def turn(mode, delay, del2):
+    #GPIO.setmode(GPIO.BOARD)
+    #GPIO.setwarnings(True)
+
     steps = 200    
-    STATE = 16   #GPIO SLEEP
-    DIR = 20     #GPIO DIR
-    STEP = 21    #GPIO STEP
+    DIR = 20    #GPIO pin DIR
+    STEP = 21   #GPIO pin STEP
+    STATE = 16  #GPIO pin SLEEP
     SLEEP = 0
     WORK = 1
     CW = 1
@@ -58,8 +61,8 @@ def turn(mode, delay):
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(DIR, GPIO.OUT)
     GPIO.setup(STEP, GPIO.OUT)
-    GPIO.output(DIR, CW)
     GPIO.setup(STATE, GPIO.OUT)
+    GPIO.output(DIR, CW)
     GPIO.output(STATE, WORK)
 
     
@@ -82,8 +85,9 @@ def turn(mode, delay):
         sleep(delay)
         GPIO.output(STEP, GPIO.LOW)
         sleep(delay)
-        [dist,strength] = get_distance()
-        points.append((x,dist,strength))
+        sleep(del2)
+       # [dist,strength] = get_distance()
+       # points.append((x,dist,strength))
     
     GPIO.output(DIR, CCW)
     
@@ -95,6 +99,19 @@ def turn(mode, delay):
     GPIO.output(STATE, SLEEP)
     GPIO.cleanup()
     return points
+
+
+def main():
+    mode = int(sys.argv[1])
+    d1 = float(sys.argv[2])
+    d2 = float(sys.argv[3])
+    print("mode : %d d1: %f d2: %f" % (mode, d1, d2)) 
+    turn(mode, d1, d2)
+    
+if __name__ == "__main__":
+    main()
+
+
 
 
 
