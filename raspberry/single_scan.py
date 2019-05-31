@@ -39,7 +39,7 @@ def get_distance():
     return [distance, strength]
 
 def turn(mode, delay, camera, cv2, np, start_x):
-    sensitivity = 0.9
+    sensitivity = 0.4
     missed_steppes_scan = 0
     missed_steppes_return = 0
 
@@ -120,9 +120,17 @@ def turn(mode, delay, camera, cv2, np, start_x):
 
     str = res.value
     if str > sensitivity:
+        GPIO.output(STATE, 0)
+        sleep(1)
+        GPIO.cleanup()
         return points, missed_steppes_scan, missed_steppes_return
     print("po powrocie moc: %f" %(str))
     new_x = find(camera, cv2, np)
+    if abs(new_x - start_x) < 5:
+        GPIO.output(STATE, 0)
+        sleep(1)
+        GPIO.cleanup()
+        return points, missed_steppes_scan, missed_steppes_return
     print("docelowy x: %d, obecny x: %d" %(start_x, new_x))
     if new_x < start_x:
         GPIO.output(DIR, CW)
@@ -148,8 +156,11 @@ def turn(mode, delay, camera, cv2, np, start_x):
             missed_steppes_return = x + 1
             break
 
-    GPIO.output(STATE, SLEEP)
+    #sleep(1)
+    GPIO.output(STATE, 0)
+    sleep(1)
     GPIO.cleanup()
+    print("skonczylem!")
     return points, missed_steppes_scan, missed_steppes_return
 
 
