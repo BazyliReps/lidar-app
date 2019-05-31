@@ -93,6 +93,7 @@ def turn(mode, delay, camera, cv2, np, start_x):
         calibrate = False
     print("kalibruje po skanie")
     GPIO.output(MODE, RESOLUTION[2])
+    sleep(1)
     while calibrate:
         missed_steppes_scan += 1
         GPIO.output(STEP, GPIO.HIGH)
@@ -107,7 +108,9 @@ def turn(mode, delay, camera, cv2, np, start_x):
         missed_steppes_scan += 1
 
     GPIO.output(MODE, RESOLUTION[mode])
+    sleep(0.1)
     GPIO.output(DIR, CW)
+    sleep(0.1)
     print("wracam")
     for x in range(steps):
         GPIO.output(STEP, GPIO.HIGH)
@@ -120,6 +123,7 @@ def turn(mode, delay, camera, cv2, np, start_x):
         return points, missed_steppes_scan, missed_steppes_return
     print("po powrocie moc: %f" %(str))
     new_x = find(camera, cv2, np)
+    print("docelowy x: %d, obecny x: %d" %(start_x, new_x))
     if new_x < start_x:
         GPIO.output(DIR, CW)
         print("laser na lewo")
@@ -127,8 +131,10 @@ def turn(mode, delay, camera, cv2, np, start_x):
         GPIO.output(DIR, CCW)
         print("laser na prawo")
 
+    sleep(2)
     print("kalibruje po powrocie")
     GPIO.output(MODE, RESOLUTION[2])
+    sleep(0.1)
     for x in range(20):
         GPIO.output(STEP, GPIO.HIGH)
         sleep(delay)
