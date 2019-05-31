@@ -3,6 +3,10 @@ import paho.mqtt.publish as publish
 import json
 from single_scan import turn
 from datetime import datetime
+from picamera import PiCamera
+import cv2
+import numpy as np
+from find_laser_dot import find
 
 def on_connect(client, userdata, flags, rc):
     client.subscribe("make_scan")
@@ -14,29 +18,32 @@ def calibrate():
 def on_message(client, userdata, msg):
     print(msg.topic)
     if msg.topic == "make_scan":
-        payload = json.loads(msg.payload)
+        payload = json.loads(msg.payload.decode('utf-8'))
+
         scenario_id = payload["id"]
         tests = payload["tests"]
         results = []
+        camera = PiCamera()
+        camera.resolution = (1024, 768)
+        start_x = find(camera, cv2, np)
         for t in tests:
             delay = float(t["delay"])
             mode = int(t["operating_mode"])
             reps = int(t["repetitions"])
-            print(reps)
             for r in range(reps):
-                print("w reps")
                 start_time = datetime.now()
-                measurements = json.dumps(turn(mode, delay))
+                measurements,missed_steppes_scan,missed_steppes_return = turn(mode, delay, camera, cv2, np, start_x)
+                measurements = json.dumps(measurements)
                 stop_time = datetime.now()
                 scan_time = (stop_time - start_time).total_seconds()
-                print(scan_time)
-                print(type(scan_time))
-                missed_steppes = calibrate()
-                results.append({"delay": delay, "mode": mode, "measurements": measurements, "scan_time": scan_time, "missed_steppes": missed_steppes})
+                print("czas skanu: %f" %(scan_time))
+                results.append({"delay": delay, "mode": mode, "measurements": measurements, "scan_time": scan_time, 
+                    "missed_steppes_scan": missed_steppes_scan, "missed_steppes_return": missed_steppes_return})
 
         return_data = json.dumps({"scenario_id": scenario_id, "results": results})
         publish.single("scan_ready", return_data, hostname="192.168.0.50")
         print("scan ready!")
+        camera.close()
 
 
 client = mqtt.Client()

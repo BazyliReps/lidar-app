@@ -67,7 +67,7 @@ def turn(mode, delay, del2, offset):
     lost_steps = 0
     
     while calibrate:
-        lost_steps += 1    
+        lost_steps += 1
         GPIO.output(STEP, GPIO.HIGH)
         sleep(delay)
         GPIO.output(STEP, GPIO.LOW)
@@ -77,7 +77,7 @@ def turn(mode, delay, del2, offset):
         if str > sensitivity:
             print("[pomiar]: zgubiono %d krokow moc %f" %(lost_steps, str))
             break
-        lost_steps += 1    
+        lost_steps += 1
     
 
     GPIO.output(DIR, CW)
