@@ -36,7 +36,7 @@ def get_distance():
         ser.reset_input_buffer()
     if ser != None:
         ser.close()
-    return [dist, strength]
+    return [distance, strength]
 
 def turn(mode, delay, camera, cv2, np, start_x):
     sensitivity = 0.9
