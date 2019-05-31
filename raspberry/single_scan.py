@@ -45,25 +45,20 @@ def turn(mode, delay, camera, cv2, np, start_x):
 
 
     steps = 200    
-    STATE = 16   #GPIO SLEEP
     DIR = 20     #GPIO DIR
     STEP = 21    #GPIO STEP
-    SLEEP = 0
-    WORK = 1
     CW = 0
     CCW = 1
     steps *= mode
-    GPIO.setwarnings(False)
-    GPIO.cleanup()
+    #GPIO.setwarnings(False)
+    #GPIO.cleanup()
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(DIR, GPIO.OUT)
     GPIO.setup(STEP, GPIO.OUT)
     GPIO.output(DIR, CCW)
-    GPIO.setup(STATE, GPIO.OUT)
-    GPIO.output(STATE, WORK)
 
     
-
+    sleep(0.1)
     res = MCP3008(0)
 
     MODE = (17, 27, 22)
@@ -78,6 +73,7 @@ def turn(mode, delay, camera, cv2, np, start_x):
     
     GPIO.output(MODE, RESOLUTION[mode])
     print("skanuje")
+    sleep(0.1)
     points = list()
     for x in range(steps):
         GPIO.output(STEP, GPIO.HIGH)
@@ -87,25 +83,38 @@ def turn(mode, delay, camera, cv2, np, start_x):
         [dist,strength] = get_distance()
         points.append((x,dist,strength))
     
+
     str = res.value
-    calibrate = True
-    if str > sensitivity:
-        calibrate = False
-    print("kalibruje po skanie")
-    GPIO.output(MODE, RESOLUTION[2])
-    sleep(1)
-    while calibrate:
-        missed_steppes_scan += 1
-        GPIO.output(STEP, GPIO.HIGH)
-        sleep(delay)
-        GPIO.output(STEP, GPIO.LOW)
-        sleep(delay)
-        sleep(0.05)
-        str = res.value
-        if str > sensitivity:
-            print("[pomiar]: zgubiono %d krokow moc %f" %(missed_steppes_scan, str))
-            break
-        missed_steppes_scan += 1
+    if str < sensitivity:
+        print("moc: %f, kalibruje!" %(str))
+
+        new_x = find(camera, cv2, np)
+        if abs(new_x - start_x) > 5:
+        
+            print("docelowy x: %d, obecny x: %d" %(start_x, new_x))
+            if new_x < start_x:
+                GPIO.output(DIR, CW)
+                print("laser na lewo")
+            else:
+                GPIO.output(DIR, CCW)
+                print("laser na prawo")
+
+            sleep(2)
+            GPIO.output(MODE, RESOLUTION[2])
+            sleep(0.1)
+            for x in range(20):
+                GPIO.output(STEP, GPIO.HIGH)
+                sleep(delay)
+                GPIO.output(STEP, GPIO.LOW)
+                sleep(delay)
+                sleep(0.05)
+                str = res.value
+                if str > sensitivity:
+                    print("[powrot]: zgubiono %d krokow moc %f" %(x + 1, str))
+                    missed_steppes_scan = x + 1
+                    break
+
+    
 
     GPIO.output(MODE, RESOLUTION[mode])
     sleep(0.1)
@@ -118,19 +127,18 @@ def turn(mode, delay, camera, cv2, np, start_x):
         GPIO.output(STEP, GPIO.LOW)
         sleep(delay)
 
+    sleep(1)
     str = res.value
     if str > sensitivity:
-        GPIO.output(STATE, 0)
-        sleep(1)
-        GPIO.cleanup()
+        print("moc: %f, wychodze!" %(str))
         return points, missed_steppes_scan, missed_steppes_return
+    
     print("po powrocie moc: %f" %(str))
     new_x = find(camera, cv2, np)
     if abs(new_x - start_x) < 5:
-        GPIO.output(STATE, 0)
-        sleep(1)
-        GPIO.cleanup()
+        print("trafilem w cel, wychodze")
         return points, missed_steppes_scan, missed_steppes_return
+    
     print("docelowy x: %d, obecny x: %d" %(start_x, new_x))
     if new_x < start_x:
         GPIO.output(DIR, CW)
@@ -156,10 +164,6 @@ def turn(mode, delay, camera, cv2, np, start_x):
             missed_steppes_return = x + 1
             break
 
-    #sleep(1)
-    GPIO.output(STATE, 0)
-    sleep(1)
-    GPIO.cleanup()
     print("skonczylem!")
     return points, missed_steppes_scan, missed_steppes_return
 
