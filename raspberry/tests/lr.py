@@ -7,6 +7,10 @@ import threading
 
 ser = serial.Serial ('/dev/serial0',115200,timeout = 1)
 
+
+
+
+sensitivity = 0.8
 DIR = 20    #GPIO pin DIR
 STEP = 21   #GPIO pin STEP
 STATE = 16  #GPIO pin SLEEP
@@ -17,12 +21,9 @@ CCW = 0
 
 def turn(mode, d1, d2):
     
-    sensitivity = 0.8
-
     steps = 200    
     steps *= mode
     GPIO.setwarnings(True)
-    GPIO.cleanup()
     GPIO.setmode(GPIO.BCM)
     GPIO.setup(DIR, GPIO.OUT)
     GPIO.setup(STEP, GPIO.OUT)
@@ -42,7 +43,6 @@ def turn(mode, d1, d2):
               16 : (0, 0, 1),
               32 : (1, 0, 1)}
     GPIO.output(MODE, RESOLUTION[mode])
-    res = MCP3008(0)
     
 
     points = list()
@@ -54,7 +54,14 @@ def turn(mode, d1, d2):
     
     for x in range(steps - 7):
         step(d1, 0)
-    sleep(2)
+    
+    calibrate(d1,d2)
+    
+    GPIO.cleanup()
+    return points
+
+def calibrate(d1,d2):
+    res = MCP3008(0)
     searching = True
     ORIENTATION = CCW
 
@@ -90,10 +97,7 @@ def turn(mode, d1, d2):
         for s in range(scale):
             step(d1, d2)
 
-    #GPIO.output(STATE, SLEEP)
-    sleep(5)
-    GPIO.cleanup()
-    return points
+
 
 def step(d1, d2):
     GPIO.output(STEP, GPIO.HIGH)

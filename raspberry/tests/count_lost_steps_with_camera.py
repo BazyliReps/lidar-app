@@ -11,7 +11,7 @@ from picamera import PiCamera
 
 def turn(mode, delay, del2, offset):
     
-    sensitivity = 0.9
+    sensitivity = 0.8
     steps = 200    
     DIR = 20    #GPIO pin DIR
     STEP = 21   #GPIO pin STEP
@@ -112,7 +112,7 @@ def turn(mode, delay, del2, offset):
         str = res.value
         if str > 0.8:
             print("[powrot]: zgubiono %d krokow moc %f" %(x+1, str))
-            sleep(0.01)
+            sleep(0.1)
             break
                                                 
 

@@ -13,6 +13,7 @@ from picamera import PiCamera
 
 def turn(mode, delay, del2):
     
+    sensivity = 0.9
     steps = 200    
     DIR = 20    #GPIO pin DIR
     STEP = 21   #GPIO pin STEP
@@ -35,7 +36,7 @@ def turn(mode, delay, del2):
     camera.resolution = (1024, 768)
 
     x = find(camera, cv2, np)
-    print("przesun laser!")
+    print("x poczatkowe: %d. przesun laser!" %(x))
     for i in range(5):
         print(i)
         sleep(1)
@@ -77,7 +78,7 @@ def turn(mode, delay, del2):
         sleep(delay)
         sleep(del2)
         str = res.value
-        if str > 0.8:
+        if str > sensivity:
             sleep(0.01)
             return
     

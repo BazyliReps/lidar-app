@@ -9,7 +9,8 @@ ser = serial.Serial ('/dev/serial0',115200,timeout = 1)
 
 
 def turn(mode, delay, del2):
-
+    
+    sensitivity = 0.9
     steps = 200    
     DIR = 20    #GPIO pin DIR
     STEP = 21   #GPIO pin STEP
@@ -52,7 +53,7 @@ def turn(mode, delay, del2):
         sleep(del2)
         str = res.value
         print(str)
-        if str > 0.8:
+        if str > sensitivity:
             sleep(0.01)
             return
        # [dist,strength] = get_distance()
@@ -71,9 +72,9 @@ def turn(mode, delay, del2):
 
 
 def main():
-    mode = int(sys.argv[1])
-    d1 = float(sys.argv[2])
-    d2 = float(sys.argv[3])
+    mode = 2# int(sys.argv[1])
+    d1 = 0.001#float(sys.argv[2])
+    d2 = 0.01#float(sys.argv[3])
     print("mode : %d d1: %f d2: %f" % (mode, d1, d2)) 
     turn(mode, d1, d2)
     

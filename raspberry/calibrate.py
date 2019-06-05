@@ -9,7 +9,7 @@ from find_laser_dot import find
 
 
 def calibrate(start_x, camera, cv2, np):
-    sensitivity = 0.4
+    sensitivity = 0.9
     missed_steppes_scan = 0
     missed_steppes_return = 0
 

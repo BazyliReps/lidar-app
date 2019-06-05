@@ -7,7 +7,7 @@ def find(camera, cv2, np):
 
     img = cv2.imdecode(data, 1)
     
-    blur= cv2.medianBlur(img, 5)
+    blur= cv2.medianBlur(img, 7)
     hsv = cv2.cvtColor(blur, cv2.COLOR_BGR2HSV)
     
     
@@ -16,8 +16,8 @@ def find(camera, cv2, np):
     
     mask = cv2.inRange(hsv, lower_red, upper_red)
     
-    circles = cv2.HoughCircles(mask,cv2.HOUGH_GRADIENT,1,20,param1=20,param2=8,
-                                   minRadius=3,maxRadius=30)
+    circles = cv2.HoughCircles(mask,cv2.HOUGH_GRADIENT,1,20,param1=20,param2=9,
+                                   minRadius=4,maxRadius=15)
     
     
     index = 0
