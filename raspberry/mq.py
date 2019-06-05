@@ -9,9 +9,8 @@ from time import sleep
 
 
 def on_connect(client, userdata, flags, rc):
-    print("connecting...")
     client.subscribe("make_scan")
-    print("connected!")
+    print("connected")
 
 
 def on_message(client, userdata, msg):
@@ -20,17 +19,16 @@ def on_message(client, userdata, msg):
         payload = json.loads(msg.payload.decode('utf-8'))
         scenario_id = payload["id"]
         tests = payload["tests"]
-        results = []
         
         turn_stepper_on()
 
-        calibrate(0.001, 0.01)
-
+        calibrate(0.001, 0.01, 2)
         for t in tests:
             delay = float(t["delay"])
             mode = int(t["operating_mode"])
             reps = int(t["repetitions"])
             for r in range(reps):
+                results = []
                 start_time = datetime.now()
                 measurements,missed_steppes_scan,missed_steppes_return = turn(mode, delay)
                 measurements = json.dumps(measurements)
@@ -39,21 +37,18 @@ def on_message(client, userdata, msg):
                 print("czas skanu: %f" %(scan_time))
                 results.append({"delay": delay, "mode": mode, "measurements": measurements, "scan_time": scan_time, 
                     "missed_steppes_scan": missed_steppes_scan, "missed_steppes_return": missed_steppes_return})
-
-        return_data = json.dumps({"scenario_id": scenario_id, "results": results})
-        publish.single("scan_ready", return_data, hostname="192.168.0.50")
+                return_data = json.dumps({"scenario_id": scenario_id, "results": results})
+                publish.single("scan_ready", return_data, hostname="192.168.0.50")
+            
         print("scan ready!")
         GPIO.output(16, GPIO.LOW)
 
 
 
 client = mqtt.Client()
-print("after clent")
 client.on_connect = on_connect
 client.on_message = on_message
-print("before connect")
-client.connect("192.168.0.50", 1883, 60)
-
+client.connect("192.168.0.50", 1883, 1000)
 client.loop_forever()
 
 
