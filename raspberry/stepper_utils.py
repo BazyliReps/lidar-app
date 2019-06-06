@@ -45,8 +45,8 @@ def set_stepper_mode(mode):
 
 def calibrate(d1,d2,mode):
     set_stepper_mode(2)
-    scale = 2
-    direction = CCW
+    scale = 5
+    direction = CW
     while True:
         for s in range(scale):
             step(d1, d2)

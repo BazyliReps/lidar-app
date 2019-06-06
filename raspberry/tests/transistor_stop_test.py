@@ -2,15 +2,12 @@ from time import sleep
 from gpiozero import MCP3008
 import RPi.GPIO as GPIO
 import sys
-import serial
-import threading
 
-ser = serial.Serial ('/dev/serial0',115200,timeout = 1)
 
 
 def turn(mode, delay, del2):
     
-    sensitivity = 0.9
+    sensitivity = 0.7
     steps = 200    
     DIR = 20    #GPIO pin DIR
     STEP = 21   #GPIO pin STEP
@@ -74,7 +71,7 @@ def turn(mode, delay, del2):
 def main():
     mode = 2# int(sys.argv[1])
     d1 = 0.001#float(sys.argv[2])
-    d2 = 0.01#float(sys.argv[3])
+    d2 = float(sys.argv[1])
     print("mode : %d d1: %f d2: %f" % (mode, d1, d2)) 
     turn(mode, d1, d2)
     

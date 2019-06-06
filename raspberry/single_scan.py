@@ -2,7 +2,7 @@ from time import sleep
 from stepper_utils import step, calibrate, set_stepper_mode, is_on_spot, change_direction, set_clockwise, set_counterclockwise
 from lidar_utils import get_distance
 
-delay2 = 0.01
+delay2 = 0.03
 
 def turn(mode, delay1):
     missed_steppes_scan = 0
