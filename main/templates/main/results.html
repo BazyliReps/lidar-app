@@ -1,29 +1,37 @@
 {% extends "main/header.html" %}
 {% block content %}
+{% load static %}
+<script type="text/javascript" src="{% static 'main/scripts/display_measurements.js' %}" ></script>
+
+
 <div class="row">
 
-    <div class="col s9">
+    <div class="col s9" style="height: 1000px, width: 1000px" id="draw">
+    <script>
+        const pa = Raphael(50,50,1000,1000);
+    </script>
 
     </div>
-    <div class="col s3" id="draw">
+
+    <div id="svg" style="none">
+
+    </div>
+
+
+
+    <div class="col s3" style="height: 900px; overflow-y: auto">
         {% for r in results %}
 
-        <div class="col s12 m6 ">
-            <a , href="{{r.pk}}" style="color:#000">
+        <div class="col s12 m5 ">
+            <a onclick='draw_points({{r.measurements}}, "draw")'>
                 <div class="card hoverable">
                     <div class="cart-content">
-                        <div id="{{r.pk}}" style="height: 400px">
+                        <div id="{{r.pk}}">
                             Tryb: {{r.mode}}
                             <br>
                             Delay: {{r.delay}}
                             <br>
                             Utworzono: {{r.created}}
-                            <div id="{{r.pk}}_draw"></div>
-                            {% load static %}
-                            <script type="text/javascript" src="{% static 'main/scripts/display_measurements.js' %}" ></script>
-                            <script>
-                                draw_points({{r.measurements}}, "{{r.pk}}_draw")
-                            </script>
                         </div>
                     </div>
                 </div>
@@ -33,6 +41,9 @@
     </div>
 
 </div>
+
+<a class="btn-floating pulse btn-large waves-effect waves-light black" href="/create_pdf" ><i class="material-icons">save</i></a>
+
 
 {% endblock %}
 

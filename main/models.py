@@ -59,7 +59,7 @@ class SingleTest(models.Model):
         verbose_name_plural = "pojedyńczy test"
 
     def __str__(self):
-        return str(self.operating_mode) + " " + str(self.delay)
+        return self.name + " " + str(self.operating_mode) + " " + str(self.delay)
 
 
 class TestScenario(models.Model):
@@ -79,13 +79,14 @@ class TestScenario(models.Model):
 
 class SingleScanResult(models.Model):
     single_scan_result_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
-    created = models.DateTimeField(default=datetime.now())
+    created = models.DateTimeField(default=datetime.now, blank=True)
     delay = models.FloatField(default=0.001)
     mode = models.PositiveSmallIntegerField()
     measurements = models.TextField()
     scenario = models.ForeignKey(TestScenario, on_delete=models.CASCADE)
     scan_time = models.FloatField()
-    missed_steppes = models.PositiveSmallIntegerField()
+    missed_steppes_scan = models.PositiveSmallIntegerField()
+    missed_steppes_return = models.PositiveSmallIntegerField()
 
     def __str__(self):
         return str(self.delay) + ", " + str(self.mode) + ", " + str(self.created)

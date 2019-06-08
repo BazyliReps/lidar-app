@@ -2,9 +2,14 @@ import json
 from django.contrib import messages
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.forms import AuthenticationForm
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
 import paho.mqtt.publish as publish
+from reportlab.graphics import renderPDF
+import xml.dom.minidom
+from svglib.svglib import SvgRenderer
+from svglib.svglib import svg2rlg
 
 from .forms import NewUserForm, BoardForm, SingleTestForm, ScenarioForm
 from .models import TestBoard, Obstacle, SingleTest, TestScenario, SingleScanResult
@@ -172,9 +177,11 @@ def execute_scenario(request, id):
 
 
 def results(request):
+    results = SingleScanResult.objects.all()
+    results = results.extra(order_by=['mode'])
     return render(request=request,
                   template_name=f"main/results.html",
-                  context={"results": SingleScanResult.objects.all()})
+                  context={"results": results})
 
 
 def display_result(request, pk):
@@ -182,3 +189,14 @@ def display_result(request, pk):
     return render(request=request,
                   template_name=f"main/display_measurements.html",
                   context={"measurements": result.measurements})
+
+
+@csrf_exempt
+def create_pdf(request):
+    print("w views")
+
+    drawing = svg2rlg("file:///C:/Users/bazyli/Downloads/skan.svg")
+
+    renderPDF.drawToFile(drawing, "C:/Users/bazyli/Downloads/file.pdf")
+
+    return redirect("main:results")
