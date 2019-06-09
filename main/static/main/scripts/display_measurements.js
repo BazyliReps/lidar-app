@@ -9,9 +9,11 @@ function draw_points(data, id) {
     var size = width < height ? width : height;
 
     k = 0.18;
+    cellSize = 210 * k
+    columns = size / cellSize
 
-    var midX = width/2;
-    var midY = y + height/2;
+    var midX = Math.floor(columns/2) * cellSize;
+    var midY = Math.floor(columns/2) * cellSize;
 
     pa.clear()
     var circle = pa.circle(midX, midY, 5)
@@ -28,9 +30,6 @@ function draw_points(data, id) {
     var border = pa.rect(x, y, width, height)
     border.attr("stroke-width", "7")
 
-
-    cellSize = 20
-    columns = size / cellSize
     for(j=0; j< columns; j++) {
             var path=' \"M';
             path += ("0 ");
@@ -47,26 +46,30 @@ function draw_points(data, id) {
     deltaDeg = 2 * Math.PI / elems;
     alfa = -Math.PI;
 
-
-
-
-
     for(i = 0; i < elems; i++) {
         //console.log(data[i][1])
+        str = data[i][2];
+        color = scale(str, 0, 1000, 0, 255);
+        color = color > 255 ? 255 : color;
         l = data[i][1];
         c = pa.circle(midX + k*l*Math.cos(alfa), midY + k*l*Math.sin(alfa), 1)
+        colorString = "rgb(0," + color +",0)"
+        c.attr({
+            stroke: colorString
+        })
         alfa += deltaDeg;
     }
 
     imgSvg = pa.toSVG()
     divSvg = document.getElementById('svg')
     divSvg.innerHtml = imgSvg
-
-
 }
 
+const scale = (num, in_min, in_max, out_min, out_max) => {
+  return (num - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+}
 
-function downloadSVG() {
+async function downloadSVG() {
 
     const svg = document.getElementById('svg').innerHtml
 
@@ -75,6 +78,8 @@ function downloadSVG() {
     data = svg
 
     var file = new Blob([data], {type: type});
+    blob = URL.createObjectURL(file);
+    console.log(blob)
     if (window.navigator.msSaveOrOpenBlob) // IE10+
         window.navigator.msSaveOrOpenBlob(file, filename);
     else { // Others
@@ -90,4 +95,19 @@ function downloadSVG() {
         }, 0);
     }
 
+    await sleep(5000)
+
+    $.ajax({
+      type: "POST",
+      url: "http://127.0.0.1:8000/create_pdf",
+      data: blob
+    }).done(function() {
+      $( this ).addClass( "done" );
+    });
+
 }
+
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+

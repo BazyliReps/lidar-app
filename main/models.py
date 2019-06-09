@@ -88,5 +88,8 @@ class SingleScanResult(models.Model):
     missed_steppes_scan = models.PositiveSmallIntegerField()
     missed_steppes_return = models.PositiveSmallIntegerField()
 
+    class Meta:
+        ordering = ['created']
+
     def __str__(self):
         return str(self.delay) + ", " + str(self.mode) + ", " + str(self.created)

@@ -168,17 +168,16 @@ def execute_test(request, test_id):
 
 def execute_scenario(request, id):
     scenario = TestScenario.objects.filter(id=id)[0]
-    tests_set = list(scenario.tests.all().values())
+    tests_set = sorted(list(scenario.tests.all().values()), key=lambda t: int(t['operating_mode']))
     data = {"id": id, "tests": tests_set}
     data_json = json.dumps(data, default=lambda d: '<>')
-    print(data_json)
     publish.single("make_scan", data_json, hostname="192.168.0.50")
     return redirect("main:scenarios")
 
 
 def results(request):
     results = SingleScanResult.objects.all()
-    results = results.extra(order_by=['mode'])
+    results = results.extra(order_by=['created'])
     return render(request=request,
                   template_name=f"main/results.html",
                   context={"results": results})
@@ -194,9 +193,10 @@ def display_result(request, pk):
 @csrf_exempt
 def create_pdf(request):
     print("w views")
+    print(request.body.decode("utf-8"))
+    svgURL = request.body.decode("utf-8")
+    drawing = svg2rlg("C:/Users/bazyli/repozytoria/lidar-app/skan.svg")
 
-    drawing = svg2rlg("file:///C:/Users/bazyli/Downloads/skan.svg")
-
-    renderPDF.drawToFile(drawing, "C:/Users/bazyli/Downloads/file.pdf")
+    renderPDF.drawToFile(drawing, "C:/Users/bazyli/repozytoria/lidar-app/skanPDF.pdf")
 
     return redirect("main:results")
