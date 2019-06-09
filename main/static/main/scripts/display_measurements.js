@@ -1,6 +1,8 @@
-function draw_points(data, id) {
+function draw_points(data, mode, id) {
     var div = document.getElementById(id);
     var rect = div.getBoundingClientRect();
+
+    scan_mode = mode;
 
     var x = 0//rect.left;
     var y = 0//rect.top;
@@ -69,42 +71,42 @@ const scale = (num, in_min, in_max, out_min, out_max) => {
   return (num - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
 }
 
-async function downloadSVG() {
+async function downloadSVG(filename) {
 
     const svg = document.getElementById('svg').innerHtml
-
-    filename = "skan.svg"
     type = "image/svg+xml"
     data = svg
+    console.log(filename)
+    var blob = null;
+    var blob = new Blob([data], {type: type});
+    blobUrl = URL.createObjectURL(blob);
 
-    var file = new Blob([data], {type: type});
-    blob = URL.createObjectURL(file);
-    console.log(blob)
-    if (window.navigator.msSaveOrOpenBlob) // IE10+
-        window.navigator.msSaveOrOpenBlob(file, filename);
-    else { // Others
-        var a = document.createElement("a"),
-                url = URL.createObjectURL(file);
-        a.href = url;
-        a.download = filename;
-        document.body.appendChild(a);
-        a.click();
-        setTimeout(function() {
-            document.body.removeChild(a);
-            window.URL.revokeObjectURL(url);
-        }, 0);
+
+
+    var xhr = new XMLHttpRequest;
+    xhr.responseType = 'blob';
+
+    xhr.onload = function() {
+        var recoveredBlob = xhr.response;
+
+        var reader = new FileReader;
+
+        reader.onload = function() {
+            var blobAsDataUrl = reader.result;
+            $.ajax({
+              type: "POST",
+              url: "http://127.0.0.1:8000/create_pdf/" + filename,
+              data: blobAsDataUrl
+            }).done(function() {
+              $( this ).addClass( "done" );
+            });
+        };
+
+        reader.readAsDataURL(recoveredBlob);
     }
 
-    await sleep(5000)
-
-    $.ajax({
-      type: "POST",
-      url: "http://127.0.0.1:8000/create_pdf",
-      data: blob
-    }).done(function() {
-      $( this ).addClass( "done" );
-    });
-
+    xhr.open('GET', blobUrl);
+    xhr.send();
 }
 
 function sleep(ms) {

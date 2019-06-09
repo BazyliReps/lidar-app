@@ -2,14 +2,12 @@ import json
 from django.contrib import messages
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.forms import AuthenticationForm
-from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
 import paho.mqtt.publish as publish
 from reportlab.graphics import renderPDF
-import xml.dom.minidom
-from svglib.svglib import SvgRenderer
 from svglib.svglib import svg2rlg
+import urllib.request as my_request
 
 from .forms import NewUserForm, BoardForm, SingleTestForm, ScenarioForm
 from .models import TestBoard, Obstacle, SingleTest, TestScenario, SingleScanResult
@@ -191,12 +189,22 @@ def display_result(request, pk):
 
 
 @csrf_exempt
-def create_pdf(request):
+def create_pdf(request, filename):
     print("w views")
-    print(request.body.decode("utf-8"))
-    svgURL = request.body.decode("utf-8")
-    drawing = svg2rlg("C:/Users/bazyli/repozytoria/lidar-app/skan.svg")
+    # print(request.body.decode("utf-8"))
+    svg_url = request.body.decode("utf-8")
+    fake_useragent = "Mozilla/5.0 (Windows; U; Win98; en-US; rv:0.9.2) Gecko/20010725 Netscape6/6.1"
+    r = my_request.Request(svg_url, headers={'User-Agent': fake_useragent})
+    print("po req")
+    f = my_request.urlopen(r)
+    byte_array = bytearray(f.read())
+    svg_file = open(filename + ".svg", "wb")
+    svg_file.write(byte_array)
 
-    renderPDF.drawToFile(drawing, "C:/Users/bazyli/repozytoria/lidar-app/skanPDF.pdf")
+    svg_path = "C:/Users/bazyli/repozytoria/lidar-app/" + filename + ".svg"
+    pdf_path = "C:/Users/bazyli/repozytoria/lidar-app/" + filename + ".pdf"
+
+    drawing = svg2rlg(svg_path)
+    renderPDF.drawToFile(drawing, pdf_path)
 
     return redirect("main:results")

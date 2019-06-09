@@ -34,5 +34,5 @@ urlpatterns = [
     path("scenarios/<id>", views.execute_scenario, name="execute_scenario"),
     path("results/", views.results, name="results"),
     path("results/<pk>", views.display_result, name="display_result"),
-    path("create_pdf", views.create_pdf),
+    path("create_pdf/<filename>", views.create_pdf),
 ]

@@ -3,12 +3,13 @@
 {% load static %}
 <script type="text/javascript" src="{% static 'main/scripts/display_measurements.js' %}" ></script>
 
-<a class="btn-floating pulse btn-large waves-effect waves-light black" onclick="downloadSVG()"  ><i class="material-icons">save</i></a>
+<a class="btn-floating pulse btn-large waves-effect waves-light black" onclick="downloadSVG(scan_mode)"  ><i class="material-icons">save</i></a>
 <div class="row">
 
     <div class="col s9" style="height: 1000px, width: 1000px" id="draw">
     <script>
         const pa = Raphael(50,50,1000,1000);
+        var scan_mode;
     </script>
 
     </div>
@@ -23,7 +24,7 @@
         {% for r in results %}
 
         <div class="col s12 m5 ">
-            <a onclick='draw_points({{r.measurements}}, "draw")'>
+            <a onclick='draw_points({{r.measurements}},{{r.mode}}, "draw")'>
                 <div class="card hoverable">
                     <div class="cart-content">
                         <div id="{{r.pk}}">
