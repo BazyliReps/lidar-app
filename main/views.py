@@ -9,6 +9,8 @@ from reportlab.graphics import renderPDF
 from svglib.svglib import svg2rlg
 import urllib.request as my_request
 
+from subprocess import Popen
+
 from .forms import NewUserForm, BoardForm, SingleTestForm, ScenarioForm
 from .models import TestBoard, Obstacle, SingleTest, TestScenario, SingleScanResult
 
@@ -190,21 +192,28 @@ def display_result(request, pk):
 
 @csrf_exempt
 def create_pdf(request, filename):
-    print("w views")
-    # print(request.body.decode("utf-8"))
+    svg_path = "C:/Users/bazyli/repozytoria/lidar-app/scan_svg_files/" + filename + ".svg"
+    pdf_path = "C:/Users/bazyli/repozytoria/lidar-app/scan_pdf_files/" + filename + ".pdf"
+
     svg_url = request.body.decode("utf-8")
     fake_useragent = "Mozilla/5.0 (Windows; U; Win98; en-US; rv:0.9.2) Gecko/20010725 Netscape6/6.1"
     r = my_request.Request(svg_url, headers={'User-Agent': fake_useragent})
     print("po req")
     f = my_request.urlopen(r)
     byte_array = bytearray(f.read())
-    svg_file = open(filename + ".svg", "wb")
+    svg_file = open(svg_path, "wb")
     svg_file.write(byte_array)
+    # svg_file.close()
 
-    svg_path = "C:/Users/bazyli/repozytoria/lidar-app/" + filename + ".svg"
-    pdf_path = "C:/Users/bazyli/repozytoria/lidar-app/" + filename + ".pdf"
 
-    drawing = svg2rlg(svg_path)
-    renderPDF.drawToFile(drawing, pdf_path)
+    x = Popen(['C:\Program Files\Inkscape\inkscape.exe', svg_path, \
+               '--export-pdf=%s' % pdf_path])
+    try:
+        out, err = x.communicate()
+        if x.returncode < 0:
+            r = "Popen returncode: " + str(x.returncode)
+            raise OSError(r)
+    except OSError as e:
+        return False
 
     return redirect("main:results")

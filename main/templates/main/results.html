@@ -1,8 +1,11 @@
 {% extends "main/header.html" %}
 {% block content %}
 {% load static %}
+
+
 <script type="text/javascript" src="{% static 'main/scripts/display_measurements.js' %}" ></script>
 
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <a class="btn-floating pulse btn-large waves-effect waves-light black" onclick="downloadSVG(scan_mode)"  ><i class="material-icons">save</i></a>
 <div class="row">
 

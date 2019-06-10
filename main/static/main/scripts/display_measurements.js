@@ -51,7 +51,7 @@ function draw_points(data, mode, id) {
     for(i = 0; i < elems; i++) {
         //console.log(data[i][1])
         str = data[i][2];
-        color = scale(str, 0, 1000, 0, 255);
+        color = scale(str, 0, 1200, 0, 255);
         color = color > 255 ? 255 : color;
         l = data[i][1];
         c = pa.circle(midX + k*l*Math.cos(alfa), midY + k*l*Math.sin(alfa), 1)
