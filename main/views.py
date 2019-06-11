@@ -5,8 +5,6 @@ from django.contrib.auth.forms import AuthenticationForm
 from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
 import paho.mqtt.publish as publish
-from reportlab.graphics import renderPDF
-from svglib.svglib import svg2rlg
 import urllib.request as my_request
 
 from subprocess import Popen
